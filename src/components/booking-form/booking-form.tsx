@@ -9,8 +9,16 @@ import { Form, FormField, FormItem, FormMessage } from '@/components/ui/form'
 
 import { Button } from '../ui/button'
 import { DateRangePicker, SelectPlace } from '..'
+import useBooking from '@/hooks/use-booking'
+import { useState } from 'react'
+import { Loader2 } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 export default function BookingForm() {
+  const { createBooking } = useBooking()
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
+
   const form = useForm<z.infer<typeof bookingFormSchema>>({
     resolver: zodResolver(bookingFormSchema),
     defaultValues: {
@@ -30,7 +38,13 @@ export default function BookingForm() {
       dates: values.dates,
     }
 
-    console.log(newBooking)
+    setLoading(true)
+    setTimeout(() => {
+      createBooking(newBooking)
+
+      setLoading(false)
+      navigate('/booking-management')
+    }, 2000)
   }
 
   return (
@@ -62,8 +76,15 @@ export default function BookingForm() {
         />
 
         <div className="sm:col-span-1">
-          <Button type="submit" className="uppercase">
-            Book now
+          <Button type="submit" className="uppercase" disabled={loading}>
+            {loading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Booking...
+              </>
+            ) : (
+              'Book now'
+            )}
           </Button>
         </div>
       </form>
