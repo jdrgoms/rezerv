@@ -1,2 +1,2 @@
 export * from './places'
-export * from './storage'
+export * from './booking-storage'
