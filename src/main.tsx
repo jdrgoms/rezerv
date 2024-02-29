@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 
-import App from './app'
+import App from './App'
 import BookingProvider from '@/contexts/booking-context'
 
 import '@/styles/globals.css'
