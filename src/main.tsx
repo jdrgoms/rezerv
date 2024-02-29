@@ -1,9 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./app.tsx";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+import App from './app'
+import BookingProvider from '@/contexts/booking.context'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+    <BookingProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </BookingProvider>
+  </React.StrictMode>,
+)
